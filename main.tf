@@ -29,7 +29,7 @@ data "aws_internet_gateway" "my_igw" {
 
 variable "my_security_group" {}
 
-data "aws_security_group" "selected" {
+data "aws_security_group" "My_SG_group" {
   id = var.my_security_group
 }
 
@@ -200,7 +200,7 @@ resource "aws_eks_cluster" "example" {
 
   vpc_config {
     subnet_ids = [aws_subnet.private_subnet_1.id,aws_subnet.private_subnet_2.id]
-    security_group_id = data.aws_security_group.my_security_group.id
+    security_group_id = [data.aws_security_group.My_SG_group.id]
   }
 
   depends_on = [
